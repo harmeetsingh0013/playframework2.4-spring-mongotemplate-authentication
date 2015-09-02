@@ -17,11 +17,7 @@ import com.google.common.base.MoreObjects;
 @Document(collection="users")
 public class User extends AbstractDocument implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	
 	private String name;
 
 	public String getName() {

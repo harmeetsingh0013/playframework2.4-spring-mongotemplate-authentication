@@ -16,7 +16,7 @@ import com.google.common.base.Objects;
 public abstract class AbstractDocument {
 
 	@Id
-	private String id;
+	protected String id;
 	private Date createdAt;
 	private Date updateAt;
 	

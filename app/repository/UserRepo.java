@@ -3,6 +3,9 @@
  */
 package repository;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 import org.springframework.stereotype.Repository;
 
 import documents.User;

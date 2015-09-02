@@ -6,7 +6,6 @@ package configuration;
 
 import java.net.InetSocketAddress;
 
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
@@ -22,7 +21,6 @@ import com.mongodb.ServerAddress;
  * @version 1.0
  */
 @Configuration
-@ComponentScan
 @EnableMongoRepositories(basePackages="repository")
 public class SpringDataMongoConfiguration extends AbstractMongoConfiguration{
 

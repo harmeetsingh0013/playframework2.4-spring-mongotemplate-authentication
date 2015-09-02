@@ -20,7 +20,7 @@ public class Global extends GlobalSettings{
 	public void onStart(final Application app) {
 		super.onStart(app);
 		context.register(SpringDataMongoConfiguration.class);
-		context.scan("controllers", "documents", "repository", "service");
+		context.scan("app");
 		context.refresh();
 		context.start();
 	}

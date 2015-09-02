@@ -3,10 +3,12 @@
  */
 package repository.impl;
 
+import static org.springframework.data.mongodb.core.query.Criteria.where;
+import static org.springframework.data.mongodb.core.query.Query.query;
+
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +16,6 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.repository.query.MongoEntityInformation;
 import org.springframework.data.mongodb.repository.support.SimpleMongoRepository;
-import static org.springframework.data.mongodb.core.query.Query.*;
-import static org.springframework.data.mongodb.core.query.Criteria.*;
 
 import repository.GenericRepository;
 
@@ -44,10 +44,10 @@ public class GenericRepositoryImpl<T, ID extends Serializable> extends SimpleMon
 		return optional;
 	}
 
-	@Override
-	public Optional<List<T>> findByProperty(String property, Object value) {
+	/*@Override
+	public Optional<List<T>> findListByProperty(String property, Object value) {
 		Optional<List<T>> optional = Optional.empty();
 		Optional.ofNullable(mongoTemplate.find(query(where(property).is(value)), entityClass.getClass()));
 		return optional;
-	}
+	}*/
 }

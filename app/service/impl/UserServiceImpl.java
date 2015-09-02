@@ -5,8 +5,11 @@ package service.impl;
 
 import java.util.Optional;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import documents.User;
 import repository.UserRepo;
@@ -17,7 +20,7 @@ import service.UserService;
  * @version 1.0
  */
 
-@Service
+@Named @Singleton
 public class UserServiceImpl implements UserService{
 
 	@Autowired
@@ -28,6 +31,6 @@ public class UserServiceImpl implements UserService{
 	}
 	@Override
 	public Optional<User> findUserById(String id) {
-		return userRepo.findById(id);
+		return Optional.empty();
 	}
 }

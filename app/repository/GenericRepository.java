@@ -18,5 +18,5 @@ import org.springframework.data.repository.NoRepositoryBean;
 public interface GenericRepository<T, ID extends Serializable> extends MongoRepository<T, Serializable>{
 
 	public Optional<T> findById(String id);
-	public Optional<List<T>> findByProperty(String property, Object value);
+	//public Optional<List<T>> findListByProperty(String property, Object value);
 }

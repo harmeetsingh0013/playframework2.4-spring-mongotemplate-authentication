@@ -1,9 +1,9 @@
 package controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import documents.User;
 import play.*;
@@ -14,7 +14,7 @@ import views.html.*;
 @Singleton
 public class Application extends Controller {
 
-	@Autowired
+	@Inject
 	private UserService userService;
 	
     public Result index() {
