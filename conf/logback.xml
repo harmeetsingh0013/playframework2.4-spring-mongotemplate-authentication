@@ -1,22 +1,37 @@
 <configuration>
     
-  <conversionRule conversionWord="coloredLevel" converterClass="play.api.Logger$ColoredLevel" />
+  <configuration scan="true">
+	<contextName>Play-Mongo-Template-Authentication</contextName>
 
-  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-    <encoder>
-      <pattern>%coloredLevel - %logger - %message%n%xException</pattern>
-    </encoder>
-  </appender>
+	<timestamp key="timeFormat" datePattern="yyyyMMdd'T'HHmmss"	timeReference="contextBirth" />
 
-  <!--
-    The logger name is typically the Java/Scala package name.
-    This configures the log level to log at for a package and its children packages.
-  -->
-  <logger name="play" level="INFO" />
-  <logger name="application" level="DEBUG" />
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss} %contextName [%thread] %-5level %logger{60} [Line-No:%line] - %msg%n</pattern>
+		</encoder>
+	</appender>
 
-  <root level="ERROR">
-    <appender-ref ref="STDOUT" />
-  </root>
+	<appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${application.home}/play-mongotemplate</file>
+		<append>true</append>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${application.home}/play-mongotemplate-%d{yyyy-MM-dd}.%i.log
+			</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy	class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>100MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+			<maxHistory>6</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{HH:mm:ss} %contextName [%thread] %-5level %logger{60} [Line-No:%line] - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="play" level="INFO" />
+	<logger name="application" level="DEBUG" />
+
+	<root level="ERROR">
+		<appender-ref ref="STDOUT" />
+	</root>
 
 </configuration>
