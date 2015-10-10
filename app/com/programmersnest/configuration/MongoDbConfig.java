@@ -1,16 +1,17 @@
 /**
  * 
  */
-package configuration;
+package com.programmersnest.configuration;
 
 
 import java.net.InetSocketAddress;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import javax.inject.Singleton;
 
-import com.mongodb.Mongo;
+import org.springframework.data.mongodb.MongoDbFactory;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
+
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
 import com.mongodb.MongoClientOptions.Builder;
@@ -20,9 +21,9 @@ import com.mongodb.ServerAddress;
  * @author Harmeet Singh(Taara)
  * @version 1.0
  */
-@Configuration
-@EnableMongoRepositories(basePackages="repository")
-public class SpringDataMongoConfiguration extends AbstractMongoConfiguration{
+
+@Singleton
+public class MongoDbConfig{
 
 	private play.Configuration configuration = play.Configuration.root();
 	
@@ -43,18 +44,18 @@ public class SpringDataMongoConfiguration extends AbstractMongoConfiguration{
 		return serverAddress;
 	}
 	
-	@Override
-	protected String getDatabaseName() {
-		return configuration.getString("mongodb.dbname");
-	}
-
-	@Override
-	public Mongo mongo() throws Exception {
+	private MongoClient mongoClient(){
 		return new MongoClient(serverAddress(), mongoClientOptions());
 	}
 	
-	@Override
-	protected String getMappingBasePackage() {
-		return configuration.getString("package.scan");
+	private MongoDbFactory mongoDbFactory(){
+		SimpleMongoDbFactory factory = new SimpleMongoDbFactory(mongoClient(), configuration.getString("mongodb.dbname"));
+		return factory;
 	}
+	
+	public MongoTemplate mongoTemplate(){
+		MongoTemplate template = new MongoTemplate(mongoDbFactory());
+		return template;
+	}
+	
 }

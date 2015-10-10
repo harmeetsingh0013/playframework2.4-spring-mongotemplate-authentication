@@ -1,7 +1,7 @@
 /**
  * 
  */
-package documents;
+package com.programmersnest.documents;
 
 import java.io.Serializable;
 

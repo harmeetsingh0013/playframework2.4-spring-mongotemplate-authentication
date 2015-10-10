@@ -1,7 +1,7 @@
 /**
  * 
  */
-package service.impl;
+package com.programmersnest.service.impl;
 
 import java.util.Optional;
 
@@ -9,25 +9,24 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import documents.User;
-import repository.UserRepo;
-import service.UserService;
+import com.programmersnest.documents.User;
+import com.programmersnest.repository.UserRepo;
+import com.programmersnest.service.UserService;
 
 /**
  * @author Harmeet Singh(Taara)
  * @version 1.0
  */
 
-@Named @Singleton
+@Singleton @Named(value="userService")
 public class UserServiceImpl implements UserService{
 
-	@Autowired
+	@Inject
 	private UserRepo userRepo;
 	
-	public void saveNewUser(User user) {
-		userRepo.save(user);
+	public Optional<String> saveNewUser(User user) {
+		
+		return userRepo.save(user);
 	}
 	@Override
 	public Optional<User> findUserById(String id) {
